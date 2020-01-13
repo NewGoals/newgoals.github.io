@@ -54,7 +54,7 @@
 <meta property="og:description" content="如果说还是不确定自己的caffe安装是否成功，完成一个简单的小项目来进行测试。我们使用MNIST数据集来作为训练和测试样本，使用LeNet-5作为训练模型">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-09T10:04:43.000Z">
-<meta property="article:modified_time" content="2020-01-13T12:51:55.799Z">
+<meta property="article:modified_time" content="2020-01-13T13:29:27.932Z">
 <meta property="article:author" content="newgoals">
 <meta property="article:tag" content="caffe">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-13 20:51:55" itemprop="dateModified" datetime="2020-01-13T20:51:55+08:00">2020-01-13</time>
+                <time title="修改时间：2020-01-13 21:29:27" itemprop="dateModified" datetime="2020-01-13T21:29:27+08:00">2020-01-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +240,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.4k</span>
+              <span>6.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -266,7 +266,123 @@
 <h2 id="下载MNIST数据集"><a href="#下载MNIST数据集" class="headerlink" title="下载MNIST数据集"></a>下载MNIST数据集</h2><p>假设我们处在根目录(之后的文件夹操作我们都假定自己处于根目录下)，进入data/mnist，可以看到一个get_mnist.sh的脚本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env sh</span></span><br><span class="line"><span class="comment"># This scripts downloads the mnist data and unzips it.</span></span><br><span class="line"></span><br><span class="line">DIR=<span class="string">"<span class="variable">$( cd "$(dirname "$0")</span>"</span> ; <span class="built_in">pwd</span> -P )<span class="string">"</span></span><br><span class="line"><span class="string">cd "</span><span class="variable">$DIR</span><span class="string">"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">echo "</span>Downloading...<span class="string">"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">for fname in train-images-idx3-ubyte train-labels-idx1-ubyte t10k-images-idx3-ubyte t10k-labels-idx1-ubyte</span></span><br><span class="line"><span class="string">do</span></span><br><span class="line"><span class="string">    if [ ! -e <span class="variable">$fname</span> ]; then</span></span><br><span class="line"><span class="string">        wget --no-check-certificate http://yann.lecun.com/exdb/mnist/<span class="variable">$&#123;fname&#125;</span>.gz</span></span><br><span class="line"><span class="string">        gunzip <span class="variable">$&#123;fname&#125;</span>.gz</span></span><br><span class="line"><span class="string">    fi</span></span><br><span class="line"><span class="string">done</span></span><br></pre></td></tr></table></figure>
 <p>可见该脚本实现从下载地址下载mnist数据集，<code>bash get_mnist.sh</code>执行该脚本，会将该数据集下载到当前目录下，该数据集的格式可以在相关的网站查询得到。</p>
-<p><strong>TRAINING SET LABEL FILE (train-labels-idx1-ubyte):</strong><br>| [offset] | [type]     |     [value]    |      [description] |<br>| —— | ——– | —– | —– |<br>|0000 |    32 bit integer | 0x00000801(2049) |magic number (MSB first)<br>|0004 |    32 bit integer | 60000            |number of items<br>|0008 |    unsigned byte  |??               |label<br>|0009 |    unsigned byte  | ??              | label<br>|……..|<br>|xxxx|     unsigned byte|   ??|               label<br><strong>TRAINING SET IMAGE FILE (train-images-idx3-ubyte):</strong><br>|[offset]| [type]|          [value]|          [description]<br>| —- | —- | —- | —- |<br>|0000|     32 bit integer|  0x00000803(2051)| magic number<br>|0004|     32 bit integer|  60000|            number of images<br>0008|     32 bit integer|  28|               number of rows<br>0012|    32 bit integer|  28|               number of columns<br>0016|     unsigned byte|   ??|               pixel<br>0017|     unsigned byte|   ??|               pixel<br>……..|<br>xxxx|     unsigned byte|   ??|               pixel<br>测试集格式同样类似</p>
+<p><strong>TRAINING SET LABEL FILE (train-labels-idx1-ubyte):</strong></p>
+<table>
+<thead>
+<tr>
+<th>[offset]</th>
+<th>[type]</th>
+<th>[value]</th>
+<th>[description]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0000</td>
+<td>32 bit integer</td>
+<td>0x00000801(2049)</td>
+<td>magic number (MSB first)</td>
+</tr>
+<tr>
+<td>0004</td>
+<td>32 bit integer</td>
+<td>60000</td>
+<td>number of items</td>
+</tr>
+<tr>
+<td>0008</td>
+<td>unsigned byte</td>
+<td>??</td>
+<td>label</td>
+</tr>
+<tr>
+<td>0009</td>
+<td>unsigned byte</td>
+<td>??</td>
+<td>label</td>
+</tr>
+<tr>
+<td>……..</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xxxx</td>
+<td>unsigned byte</td>
+<td>??</td>
+<td>label</td>
+</tr>
+<tr>
+<td><strong>TRAINING SET IMAGE FILE (train-images-idx3-ubyte):</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>[offset]</th>
+<th>[type]</th>
+<th>[value]</th>
+<th>[description]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0000</td>
+<td>32 bit integer</td>
+<td>0x00000803(2051)</td>
+<td>magic number</td>
+</tr>
+<tr>
+<td>0004</td>
+<td>32 bit integer</td>
+<td>60000</td>
+<td>number of images</td>
+</tr>
+<tr>
+<td>0008</td>
+<td>32 bit integer</td>
+<td>28</td>
+<td>number of rows</td>
+</tr>
+<tr>
+<td>0012</td>
+<td>32 bit integer</td>
+<td>28</td>
+<td>number of columns</td>
+</tr>
+<tr>
+<td>0016</td>
+<td>unsigned byte</td>
+<td>??</td>
+<td>pixel</td>
+</tr>
+<tr>
+<td>0017</td>
+<td>unsigned byte</td>
+<td>??</td>
+<td>pixel</td>
+</tr>
+<tr>
+<td>……..</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>xxxx</td>
+<td>unsigned byte</td>
+<td>??</td>
+<td>pixel</td>
+</tr>
+<tr>
+<td>测试集格式同样类似</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 <h2 id="转换格式为LMDB"><a href="#转换格式为LMDB" class="headerlink" title="转换格式为LMDB"></a>转换格式为LMDB</h2><p>caffe对mnist样例写好了转换格式的代码，将原二进制格式转化为LMDB，在caffe根目录下执行<code>./examples/mnist/create_mnist.sh</code>，会发现在examples/mnist/mnist_train_lmdb和examples/mnist/mnist_test_lmdb两个目录，每个目录下都有两个文件：data.lmdb和lock.lmdb，由名称就可以知道一个为LMDB格式的训练集，一个为LMDB格式的测试集。</p>
 <p>可以分析以下脚本了解是如何转换的。用vim打开create_mnist.sh</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env sh</span></span><br><span class="line"><span class="comment"># This script converts the mnist data into lmdb/leveldb format,</span></span><br><span class="line"><span class="comment"># depending on the value assigned to $BACKEND.</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line">EXAMPLE=examples/mnist</span><br><span class="line">DATA=data/mnist</span><br><span class="line">BUILD=build/examples/mnist</span><br><span class="line"></span><br><span class="line">BACKEND=<span class="string">"lmdb"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Creating <span class="variable">$&#123;BACKEND&#125;</span>..."</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将原本examples/mnist中有关train和test的lmdb或leveldb格式的文件删除，重新转换</span></span><br><span class="line">rm -rf <span class="variable">$EXAMPLE</span>/mnist_train_<span class="variable">$&#123;BACKEND&#125;</span></span><br><span class="line">rm -rf <span class="variable">$EXAMPLE</span>/mnist_test_<span class="variable">$&#123;BACKEND&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用已经写好的转换工具进行类型转换</span></span><br><span class="line"><span class="variable">$BUILD</span>/convert_mnist_data.bin <span class="variable">$DATA</span>/train-images-idx3-ubyte \</span><br><span class="line">  <span class="variable">$DATA</span>/train-labels-idx1-ubyte <span class="variable">$EXAMPLE</span>/mnist_train_<span class="variable">$&#123;BACKEND&#125;</span> --backend=<span class="variable">$&#123;BACKEND&#125;</span></span><br><span class="line"><span class="variable">$BUILD</span>/convert_mnist_data.bin <span class="variable">$DATA</span>/t10k-images-idx3-ubyte \</span><br><span class="line">  <span class="variable">$DATA</span>/t10k-labels-idx1-ubyte <span class="variable">$EXAMPLE</span>/mnist_test_<span class="variable">$&#123;BACKEND&#125;</span> --backend=<span class="variable">$&#123;BACKEND&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Done."</span></span><br></pre></td></tr></table></figure>
