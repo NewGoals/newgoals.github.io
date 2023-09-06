@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Dancing Script:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="摘要：在互联网行业中，个人博客已经是我们在求职路上不可多得的加分项，因此我最近一直在思考一种能够方便，简洁的搭建个人博客的方案。在经过一段时间的摸爬滚打与分析之后我决定使用github page配合hexo的方案来架设自己的博客。主要的原因有两点：其一，完全免费；其二，方便快捷。虽然说我对网页制作有着一点基础，但是并不想太过深入，而是想把有限的时间用在我更想发展的方向，hexo几乎完美的解决了这个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录第一次搭建博客">
+<meta property="og:url" content="http://yoursite.com/2019/12/29/%E8%AE%B0%E5%BD%95%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="Newgoals&#39; Blog">
+<meta property="og:description" content="摘要：在互联网行业中，个人博客已经是我们在求职路上不可多得的加分项，因此我最近一直在思考一种能够方便，简洁的搭建个人博客的方案。在经过一段时间的摸爬滚打与分析之后我决定使用github page配合hexo的方案来架设自己的博客。主要的原因有两点：其一，完全免费；其二，方便快捷。虽然说我对网页制作有着一点基础，但是并不想太过深入，而是想把有限的时间用在我更想发展的方向，hexo几乎完美的解决了这个">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-29T09:10:15.000Z">
+<meta property="article:modified_time" content="2023-09-06T08:45:04.264Z">
+<meta property="article:author" content="newgoals">
+<meta property="article:tag" content="github page">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/29/%E8%AE%B0%E5%BD%95%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>记录第一次搭建博客 | Newgoals' Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Newgoals' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/newgoals" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/29/%E8%AE%B0%E5%BD%95%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="newgoals">
+      <meta itemprop="description" content="lirenjie的小博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Newgoals' Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          记录第一次搭建博客
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-29 17:10:15" itemprop="dateCreated datePublished" datetime="2019-12-29T17:10:15+08:00">2019-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-06 16:45:04" itemprop="dateModified" datetime="2023-09-06T16:45:04+08:00">2023-09-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>摘要：在互联网行业中，个人博客已经是我们在求职路上不可多得的加分项，因此我最近一直在思考一种能够方便，简洁的搭建个人博客的方案。在经过一段时间的摸爬滚打与分析之后我决定使用github page配合hexo的方案来架设自己的博客。主要的原因有两点：其一，完全免费；其二，方便快捷。虽然说我对网页制作有着一点基础，但是并不想太过深入，而是想把有限的时间用在我更想发展的方向，hexo几乎完美的解决了这个问题，能将markdown格式的文档转化成静态网页。至于动态部署的问题，也可以用源码github托管的方式来进行。总的来说，我觉得这算是我目前能想到的最佳解决方案了。</p>
+<a id="more"></a>
+
+<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><blockquote>
+<p>网上有很多下载教程，按照步骤和自己的要求一步步来就行</p>
+</blockquote>
+<p><a href="https://gitforwindows.org/" target="_blank" rel="noopener">git官网</a></p>
+<h2 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h2><blockquote>
+<p>网上同样有很多下载教程</p>
+</blockquote>
+<p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js官网</a></p>
+<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p>查看git，nodejs，npm是否安装成功，如果能显示版本号，则证明安装成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>进入git bash，创建blog的本地文件夹：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir Hexo</span><br></pre></td></tr></table></figure>
+
+<p>在Hexo文件夹下安装hexo，-g表示全局安装，如果对npm不太熟悉的话，建议全局安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+
+<p>如果发现npm安装过慢，我们可以弃用官方源，使用淘宝提供的源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">npm get registry  <span class="comment"># 查看npm源</span></span><br><span class="line">&gt; https://registry.npmjs.org/</span><br><span class="line"></span><br><span class="line">npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org/  <span class="comment"># 将npm源换成淘宝源</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当然也可以换回官方源</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmjs.org/</span><br></pre></td></tr></table></figure>
+
+<p>或者是采用另一种方法来设置npm，同样是采用全局安装的方法，但是后续的所有npm命令都需将npm换成cnpm:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cnpm -g --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<h2 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo配置"><a href="#hexo配置" class="headerlink" title="hexo配置"></a>hexo配置</h2><p><a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">Hexo中文文档</a></p>
+<p><a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">Next主题中文文档</a></p>
+<p><a href="https://hexo-theme-next.netlify.com/" target="_blank" rel="noopener">Next主题更新日志</a></p>
+<h3 id="解决”warning-LF-will-be-replaced-by-CRLF”"><a href="#解决”warning-LF-will-be-replaced-by-CRLF”" class="headerlink" title="解决”warning: LF will be replaced by CRLF”"></a>解决”warning: LF will be replaced by CRLF”</h3><p>Windows中的换行符为CRLF，Linux中的换行符为LF.在工作区的文件中，有的是以LF作为换行符结尾的，然后在添加到暂存区的时候，git会暂存区的LF换成CRLF。然后统一提交时候，都是CRLF换行了。</p>
+<p>使用git bash进入git根目录，或者是直接使用git-cmd（git-cmd默认在git根目录下打开），将自动转换禁止。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config –-global core.autocrlf false</span><br></pre></td></tr></table></figure>
+<h3 id="表格显示不出来的问题"><a href="#表格显示不出来的问题" class="headerlink" title="表格显示不出来的问题"></a>表格显示不出来的问题</h3><p>makedown的表格应与上文相隔至少两行才能正确显示。</p>
+<h3 id="修改主站点标题字体和大小"><a href="#修改主站点标题字体和大小" class="headerlink" title="修改主站点标题字体和大小"></a>修改主站点标题字体和大小</h3><p>Next 7.6.0支持直接在主题的_config.yml配置文件中修改的，直接搜索到font定义的区域，将enable设置为true，Next默认将google的字体库作为Next的字体库，当然也可以设为别的字体库，虽然说将其开启后会稍微影响一下网站加载速度，但是为了美观这些事情无关紧要…字体设置中包括很多部分的字体修改，这里我们选择我们需要更改的主站标题字体，先将external设置为true使其加载设置的字体库，在Google字体库中浏览决定自己想要的字体后，将其名称填入family中，对字体大小不满意的话，还可以在size中设置字体，根据提示是以em为单位( 1em=16px )：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">font:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Uri of fonts host, e.g. //fonts.googleapis.com (Default).</span></span><br><span class="line">  <span class="comment"># host: https://fonts.google.com/</span></span><br><span class="line">  <span class="comment"># Font options:</span></span><br><span class="line">  <span class="comment"># `external: true` will load this font family from `host` above.</span></span><br><span class="line">  <span class="comment"># `family: Times New Roman`. Without any quotes.</span></span><br><span class="line">  <span class="comment"># `size: x.x`. Use `em` as unit. Default: 1 (16px)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Global font settings used for all elements inside &lt;body&gt;.</span></span><br><span class="line">  <span class="attr">global:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">family:</span> <span class="string">Lato</span></span><br><span class="line">    <span class="attr">size:</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for site title (.site-title).</span></span><br><span class="line">  <span class="attr">title:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">family:</span> <span class="string">Dancing</span> <span class="string">Script</span></span><br><span class="line">    <span class="attr">size:</span> <span class="number">2.5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字数统计和阅读时长"><a href="#字数统计和阅读时长" class="headerlink" title="字数统计和阅读时长"></a>字数统计和阅读时长</h3><p>Next 7.6.0支持在主题的_config.yml配置文件中设置wordcount功能，根据自己喜好设置。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Post wordcount display settings</span></span><br><span class="line"><span class="comment">## Dependencies: https://github.com/theme-next/hexo-symbols-count-time</span></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">symbols:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">time:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_symbols:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_time:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">exclude_codeblock:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>完成了相应的设置还不行，我们还需安装其依赖包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-symbols-count-time</span><br></pre></td></tr></table></figure>
+
+<h3 id="文章访问量统计"><a href="#文章访问量统计" class="headerlink" title="文章访问量统计"></a>文章访问量统计</h3><p>Next 7.6.0支持在主题的_config.yml配置文件中设置busuanzi_count功能，将enable设置为true，其他根据自己喜好设置即可。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Show Views / Visitors of the website / page with busuanzi.</span></span><br><span class="line"><span class="comment"># Get more information on http://ibruce.info/2015/04/04/busuanzi</span></span><br><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">user</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">eye</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">eye</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="增加背景图片"><a href="#增加背景图片" class="headerlink" title="增加背景图片"></a>增加背景图片</h3><p>在Next 7.6.0主题的_config.yml配置文件中找到custom_file_path自定义文件路径，将style取消注释。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define custom file paths.</span></span><br><span class="line"><span class="comment"># Create your custom files in site directory `source/_data` and uncomment needed files below.</span></span><br><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="comment">#head: source/_data/head.swig</span></span><br><span class="line">  <span class="comment">#header: source/_data/header.swig</span></span><br><span class="line">  <span class="comment">#sidebar: source/_data/sidebar.swig</span></span><br><span class="line">  <span class="comment">#postMeta: source/_data/post-meta.swig</span></span><br><span class="line">  <span class="comment">#postBodyEnd: source/_data/post-body-end.swig</span></span><br><span class="line">  <span class="comment">#footer: source/_data/footer.swig</span></span><br><span class="line">  <span class="comment">#bodyEnd: source/_data/body-end.swig</span></span><br><span class="line">  <span class="comment">#variable: source/_data/variables.styl</span></span><br><span class="line">  <span class="comment">#mixin: source/_data/mixins.styl</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">source/_data/styles.styl</span></span><br></pre></td></tr></table></figure>
+<p>在主站根目录下新建相应的目录和文件，进入styles.styl进行编辑。</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加背景图片</span></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">      background: url(...); //图片url地址</span><br><span class="line">      <span class="attribute">background-size</span>: cover;</span><br><span class="line">      <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">      <span class="attribute">background-attachment</span>: fixed;</span><br><span class="line">      <span class="attribute">background-position</span>: <span class="number">50%</span> <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改主体透明度</span></span><br><span class="line"><span class="selector-class">.main-inner</span> &#123;</span><br><span class="line">      <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">      <span class="attribute">opacity</span>: <span class="number">0.8</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改菜单栏透明度</span></span><br><span class="line"><span class="selector-class">.header-inner</span> &#123;</span><br><span class="line">      <span class="attribute">opacity</span>: <span class="number">0.8</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Hexo源码托管到github"><a href="#Hexo源码托管到github" class="headerlink" title="Hexo源码托管到github"></a>Hexo源码托管到github</h2><blockquote>
+<p>参考博客：<a href="http://www.tiankai.party/posts/63890/" target="_blank" rel="noopener">http://www.tiankai.party/posts/63890/</a></p>
+</blockquote>
+<p>首先我们需要知道hexo g &amp;&amp; hexo d的工作原理是什么，根据参数的意思大概知道generate是将makedown文件转换成HTML格式的生成命令，而deploy则是部署，即将HTML通过git提交到github page。但是正如我开始说的，这些源码都是保存在自己电脑中，做不到动态部署，如果我们换一台主机，想写博客的话就会显得束手无策。于是我们可以选择将源码一并托管的方式来达成动态部署的目的。</p>
+<p>首先我们需要分析哪些是需要我们部署的文件，哪些是不需要的，在我们安装一些包或者是实行一些命令时会生成一些文件，而这些文件是无关紧要的，hexo clean之后查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;   .deploy_git&#x2F;  .gitignore   node_modules&#x2F;  package-lock.json  source&#x2F;</span><br><span class="line">..&#x2F;  .git&#x2F;         _config.yml  package.json   scaffolds&#x2F;         themes&#x2F;</span><br></pre></td></tr></table></figure>
+<p>至于不需要的文件有哪些，<strong><em>.gitignore</em></strong> 中就有一些…当然 <strong><em>.gitignore</em></strong> 本身也是，具体有以下几种:</p>
+<p><strong><em>public</em></strong> 和 <strong><em>.deploy_git</em></strong> 文件是hexo g &amp;&amp; hexo d分别生成的<br><strong><em>node_moudules</em></strong> 文件依赖里有packages.json可以使用npm install生成</p>
+<p>需要提交的文件有以下几种:</p>
+<p><strong><em>scaffolds</em></strong> 里面是模板文件。创建post，page或draft时会使用其中的模板，当然也可以自己预设模板<br><strong><em>source</em></strong> 中保存的是自己博客的md文件，而部署时时不会将md文件一并提交github的，所以我们需要在源码部署中将这些文件上传github<br><strong><em>_config.yml</em></strong> 如果你不想自己的主站设置丢失的话，还是将它传上去比较好<br><strong><em>themes</em></strong> 用来存放下载的主题，不想自己辛辛苦苦配置的主题丢失的话，也需将其一并上传</p>
+<p>由于主题文件是从作者的github账号中clone下来的，所以主题文件的push地址也为作者的git，但是我们只需将其当成普通文件上传即可，因此需要删除.git文件夹，如果有多个主题文件的话，选择你现在使用的themes上传即可。</p>
+<p>在上传之前还需创建一个用来保存源码的仓库，随便取个名字就好。（假设我们处在hexo根目录下）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># next-reloaded是我现在使用的主题</span></span><br><span class="line"><span class="built_in">cd</span> themes/next-reloaded/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看现在主题文件的远程分支，显而易见应该是原作者的仓库，应删除</span></span><br><span class="line">git remote -v</span><br><span class="line">rm -rf .git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退回至hexo根目录</span></span><br><span class="line"><span class="built_in">cd</span> ../..</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在根目录下初始化git，产生.git文件夹</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 此时git remote -v没有结果的，我们还需添加远程仓库</span></span><br><span class="line">git remote add origin &lt;项目地址&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询远程仓库，如果于你指定的仓库相同就可以push了</span></span><br><span class="line">git remote -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将需要的文件上传</span></span><br><span class="line">git add &lt;自己需要上传的文件&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看上传文件</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加日志 </span></span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并仓库和本地文件</span></span><br><span class="line">git pull origin master --allow-unrelated-histories</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传</span></span><br><span class="line">git push --<span class="built_in">set</span>-upstream origin master</span><br></pre></td></tr></table></figure>
+<p>在其他机器上部署时，使用git clone将源码下载到本地，在根目录下使用npm install恢复node_modules，在相关依赖安装完成的前提下，即可编辑上传。</p>
+<h3 id="在ubuntu下使用hexo"><a href="#在ubuntu下使用hexo" class="headerlink" title="在ubuntu下使用hexo"></a>在ubuntu下使用hexo</h3><p>首先要保证已经安装了git和nodejs。由于我已经安装了npm，但是版本过低，并且没有node -v查不到node版本号不知道怎么回事。需要重新安装与升级。</p>
+<p>如果node不是最新的，node有一个模块叫n，是专门用来管理node.js的版本的。使用npm（NPM是随同nodejs一起安装的包管理工具）安装n模块。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装n模块</span></span><br><span class="line">sudo npm install -g n</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级nodejs到最新稳定版</span></span><br><span class="line">sudo n stable</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级npm</span></span><br><span class="line">sudo npm install npm -g</span><br></pre></td></tr></table></figure>
+<p>此时node与npm应该都为最新版，然后使用git将源码pull到本地，并且恢复npm_modules。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone &lt;源码地址&gt;</span><br><span class="line">cd hexo-origin</span><br><span class="line">sudo npm install</span><br></pre></td></tr></table></figure>
+<p>现在即可编辑上传博客了。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/github-page/" rel="tag"># github page</a>
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/29/markdown%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="next" title="markdown的基本使用">
+      markdown的基本使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装git"><span class="nav-number">1.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装nodejs"><span class="nav-number">2.</span> <span class="nav-text">安装nodejs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hexo"><span class="nav-number">3.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化hexo"><span class="nav-number">4.</span> <span class="nav-text">初始化hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo配置"><span class="nav-number">5.</span> <span class="nav-text">hexo配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决”warning-LF-will-be-replaced-by-CRLF”"><span class="nav-number">5.1.</span> <span class="nav-text">解决”warning: LF will be replaced by CRLF”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表格显示不出来的问题"><span class="nav-number">5.2.</span> <span class="nav-text">表格显示不出来的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改主站点标题字体和大小"><span class="nav-number">5.3.</span> <span class="nav-text">修改主站点标题字体和大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字数统计和阅读时长"><span class="nav-number">5.4.</span> <span class="nav-text">字数统计和阅读时长</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章访问量统计"><span class="nav-number">5.5.</span> <span class="nav-text">文章访问量统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加背景图片"><span class="nav-number">5.6.</span> <span class="nav-text">增加背景图片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo源码托管到github"><span class="nav-number">6.</span> <span class="nav-text">Hexo源码托管到github</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在ubuntu下使用hexo"><span class="nav-number">6.1.</span> <span class="nav-text">在ubuntu下使用hexo</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">newgoals</p>
+  <div class="site-description" itemprop="description">lirenjie的小博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/newgoals" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;newgoals" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">newgoals</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">31k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">28 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
