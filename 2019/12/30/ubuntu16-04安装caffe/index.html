@@ -1,280 +1,183 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Dancing Script:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://yoursite.com').hostname,
-    root: '/',
-    scheme: 'Muse',
-    version: '7.6.0',
-    exturl: false,
-    sidebar: {"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
-
-  <meta name="description" content="为什么要使用caffe？很多人可能会这样问我。caffe有高效的cuda&#x2F;C++实现、Matlab&#x2F;Python接口、独特的神经网络描述方式、清晰的代码框架...都不是，有时候哪有这么多的理由，只是初见而已，就喜欢上了这个框架。">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ubuntu16.04安装caffe | Newgoals' Blog</title><meta name="author" content="newgoals"><meta name="copyright" content="newgoals"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="为什么要使用caffe？很多人可能会这样问我。caffe有高效的cuda&#x2F;C++实现、Matlab&#x2F;Python接口、独特的神经网络描述方式、清晰的代码框架...都不是，有时候哪有这么多的理由，只是初见而已，就喜欢上了这个框架。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu16.04安装caffe">
 <meta property="og:url" content="http://yoursite.com/2019/12/30/ubuntu16-04%E5%AE%89%E8%A3%85caffe/index.html">
 <meta property="og:site_name" content="Newgoals&#39; Blog">
 <meta property="og:description" content="为什么要使用caffe？很多人可能会这样问我。caffe有高效的cuda&#x2F;C++实现、Matlab&#x2F;Python接口、独特的神经网络描述方式、清晰的代码框架...都不是，有时候哪有这么多的理由，只是初见而已，就喜欢上了这个框架。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:published_time" content="2019-12-30T07:02:09.000Z">
 <meta property="article:modified_time" content="2023-09-06T08:45:04.264Z">
 <meta property="article:author" content="newgoals">
 <meta property="article:tag" content="caffe">
 <meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://yoursite.com/2019/12/30/ubuntu16-04%E5%AE%89%E8%A3%85caffe/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
-
-  <title>ubuntu16.04安装caffe | Newgoals' Blog</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2019/12/30/ubuntu16-04%E5%AE%89%E8%A3%85caffe/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ubuntu16.04安装caffe',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-06 16:45:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-</head>
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Newgoals' Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-</div>
-
-
-<nav class="site-nav">
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
-
-</nav>
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
-
-  <a href="https://github.com/newgoals" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content">
-            
-
-  <div class="posts-expand">
-      
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/ubuntu16-04%E5%AE%89%E8%A3%85caffe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="newgoals">
-      <meta itemprop="description" content="lirenjie的小博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Newgoals' Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          ubuntu16.04安装caffe
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-30 15:02:09" itemprop="dateCreated datePublished" datetime="2019-12-30T15:02:09+08:00">2019-12-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-06 16:45:04" itemprop="dateModified" datetime="2023-09-06T16:45:04+08:00">2023-09-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/caffe/" itemprop="url" rel="index">
-                    <span itemprop="name">caffe</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>9.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>9 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-    
-    <div class="post-body" itemprop="articleBody">
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Newgoals' Blog"><span class="site-name">Newgoals' Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">ubuntu16.04安装caffe</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-12-30T07:02:09.000Z" title="发表于 2019-12-30 15:02:09">2019-12-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-06T08:45:04.264Z" title="更新于 2023-09-06 16:45:04">2023-09-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/caffe/">caffe</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="ubuntu16.04安装caffe"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><center>为什么要使用caffe？很多人可能会这样问我。caffe有高效的cuda/C++实现、Matlab/Python接口、独特的神经网络描述方式、清晰的代码框架...都不是，有时候哪有这么多的理由，只是初见而已，就喜欢上了这个框架。</center>
 
-      
-        <center>为什么要使用caffe？很多人可能会这样问我。caffe有高效的cuda/C++实现、Matlab/Python接口、独特的神经网络描述方式、清晰的代码框架...都不是，有时候哪有这么多的理由，只是初见而已，就喜欢上了这个框架。</center>
-
-<a id="more"></a>
+<span id="more"></span>
 
 <hr>
 <blockquote>
 <p>至于为什么要是用ubuntu而不使用centos等等其他linux的发行版，完全是看个人喜好了，我也在centos环境下安装过，甚至还在windows下安装过。linux环境的安装都大同小异，网上寻找较为靠谱的教程跟着安装即可。至于windows环境的安装，我不太推荐。一个是微软有官方版本的caffe，也可以去bvlc的github下载源码,装好之后虽然能在windows环境下运行，但是很多caffe自带的bash工具无法使用，windows的命令我也不是很熟，所以在这里不做推荐。这篇博客里我也只记录一些我觉得比较重要的点，这些内容全靠我在安装之后的回想，可能会有遗漏，仅供参考。</p>
 </blockquote>
 <h2 id="Ubuntu换源"><a href="#Ubuntu换源" class="headerlink" title="Ubuntu换源"></a>Ubuntu换源</h2><p>如果你已经换过国内源了，或者是觉得官方源对你来说没有影响，那么此条内容可以跳过。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;etc&#x2F;apt     # 进入apt目录</span><br><span class="line">sudo cp sources.list sources.list.bak   # 将原来的源进行备份</span><br><span class="line">sudo vim sources.list      # 由于我们已经做好了备份，直接将里面内容替换即可，如果是桌面版也可以用gedit，较为方便</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/apt     # 进入apt目录</span><br><span class="line">sudo cp sources.list sources.list.bak   # 将原来的源进行备份</span><br><span class="line">sudo vim sources.list      # 由于我们已经做好了备份，直接将里面内容替换即可，如果是桌面版也可以用gedit，较为方便</span><br></pre></td></tr></table></figure>
 <p>我比较推荐阿里云的源，当然也可以换成其他的，网上有很多</p>
 <h3 id="阿里云源"><a href="#阿里云源" class="headerlink" title="阿里云源"></a>阿里云源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># deb cdrom:[Ubuntu 16.04 LTS _Xenial Xerus_ - Release amd64 (20160420.1)]/ xenial main restricted</span></span><br><span class="line">deb-src http://archive.ubuntu.com/ubuntu xenial main restricted <span class="comment">#Added by software-properties</span></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted multiverse universe <span class="comment">#Added by software-properties</span></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted multiverse universe <span class="comment">#Added by software-properties</span></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial universe</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse <span class="comment">#Added by software-properties</span></span><br><span class="line">deb http://archive.canonical.com/ubuntu xenial partner</span><br><span class="line">deb-src http://archive.canonical.com/ubuntu xenial partner</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted multiverse universe <span class="comment">#Added by software-properties</span></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse</span><br></pre></td></tr></table></figure>
-<h3 id="更新源"><a href="#更新源" class="headerlink" title="更新源"></a>更新源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<h3 id="更新源"><a href="#更新源" class="headerlink" title="更新源"></a>更新源</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
 
 <h2 id="安装caffe需要的依赖包"><a href="#安装caffe需要的依赖包" class="headerlink" title="安装caffe需要的依赖包"></a>安装caffe需要的依赖包</h2><blockquote>
-<p><strong>ProtoBuffer</strong> 由Google开发的一种可以实现内存与非易失存储介质交换的协议接口，通俗点来讲就是硬盘等存储文件，参见<a href="https://developers.google.com/protocol-buffers/docs/cpptutorial" target="_blank" rel="noopener">protobuffer_C++接口文档</a></p>
+<p><strong>ProtoBuffer</strong> 由Google开发的一种可以实现内存与非易失存储介质交换的协议接口，通俗点来讲就是硬盘等存储文件，参见<a target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers/docs/cpptutorial">protobuffer_C++接口文档</a></p>
 </blockquote>
 <blockquote>
 <p><strong>Boost</strong> 被称为C++准标准库，是一个功能强大，构造精巧，跨平台，开源且免费的库，caffe主要用来解决字符串的运算（或者是我只接触到这里？）。</p>
@@ -286,7 +189,7 @@
 <p><strong>GLOG</strong> 由Google开发的用于记录应用程序日志的实用库，提供基于C++标准输入输入流形式的接口，记录时可以选择不同的日志级别，方便将重要日志和普通日志分开。</p>
 </blockquote>
 <blockquote>
-<p><strong>BLAS</strong> caffe主要调用其中的方法做矩阵，向量的计算，最常用的BLAS实现有Intel MKL,ATLAS,OpenBLAS，caffe可以选择其中的任意一种，进入Makefile.config将BLAS有关设置改为BLAS := open即可，表示我们使用OpenBLAS。</p>
+<p><strong>BLAS</strong> caffe主要调用其中的方法做矩阵，向量的计算，最常用的BLAS实现有Intel MKL,ATLAS,OpenBLAS，caffe可以选择其中的任意一种，进入Makefile.config将BLAS有关设置改为BLAS :&#x3D; open即可，表示我们使用OpenBLAS。</p>
 </blockquote>
 <blockquote>
 <p><strong>HDF5</strong> 是美国国家高级计算中心(NCSA)为了满足各种领域研究需求而研制的一种能高效存储和分发科学数据的新型数据格式。caffe的训练模型经常保存为hdf5格式。</p>
@@ -300,292 +203,72 @@
 <blockquote>
 <p><strong>Snappy</strong> 用来压缩和解压缩的C++库，旨在提供较高的压缩速度和合理的压缩率。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br><span class="line">sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler</span><br><span class="line">sudo apt-get install --no-install-recommends libboost-all-dev</span><br><span class="line">sudo apt-get install libopenblas-dev liblapack-dev libatlas-base-dev</span><br><span class="line">sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br><span class="line">sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler</span><br><span class="line">sudo apt-get install --no-install-recommends libboost-all-dev</span><br><span class="line">sudo apt-get install libopenblas-dev liblapack-dev libatlas-base-dev</span><br><span class="line">sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev</span><br></pre></td></tr></table></figure>
 <p>如果你不喜欢使用ubuntu的apt-get工具自动安装的话，以上的所有依赖包均可以自行下载安装编译。</p>
-<h2 id="安装Nvidia显卡驱动"><a href="#安装Nvidia显卡驱动" class="headerlink" title="安装Nvidia显卡驱动"></a>安装Nvidia显卡驱动</h2><p>我不太推荐CPU版本的caffe，因为计算力过于低下。如果你使用的是ubuntu桌面版，那么直接进入<a href="https://www.nvidia.com/Download/index.aspx" target="_blank" rel="noopener">Nvidia官网</a>下载相对应的显卡驱动即可，如果使用的服务器或者是只有命令行的版本，可以使用apt-get的方法来安装，但是考虑到有些显卡的不支持，我推荐使用另一台可以正常访问Nvidia官网的电脑记录下载地址使用wget安装，同样的命令在安装后面的cudnn可能会遇到困难，因为cudnn的下载是需要用户登录的，可能需要在wget命令中填写cookies。</p>
+<h2 id="安装Nvidia显卡驱动"><a href="#安装Nvidia显卡驱动" class="headerlink" title="安装Nvidia显卡驱动"></a>安装Nvidia显卡驱动</h2><p>我不太推荐CPU版本的caffe，因为计算力过于低下。如果你使用的是ubuntu桌面版，那么直接进入<a target="_blank" rel="noopener" href="https://www.nvidia.com/Download/index.aspx">Nvidia官网</a>下载相对应的显卡驱动即可，如果使用的服务器或者是只有命令行的版本，可以使用apt-get的方法来安装，但是考虑到有些显卡的不支持，我推荐使用另一台可以正常访问Nvidia官网的电脑记录下载地址使用wget安装，同样的命令在安装后面的cudnn可能会遇到困难，因为cudnn的下载是需要用户登录的，可能需要在wget命令中填写cookies。</p>
 <p>如果原先有驱动但是不太适合的话，可以先进行卸载，进入驱动所在目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 777 *.run     <span class="comment"># 给执行权限</span></span><br><span class="line">sudo ./NVIDIA-Linux-x86_64-390.59.run --uninstall      <span class="comment"># 使用自带的工具进行卸载</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 777 *.run     <span class="comment"># 给执行权限</span></span><br><span class="line">sudo ./NVIDIA-Linux-x86_64-390.59.run --uninstall      <span class="comment"># 使用自带的工具进行卸载</span></span><br></pre></td></tr></table></figure>
 <h3 id="禁用nouveau"><a href="#禁用nouveau" class="headerlink" title="禁用nouveau"></a>禁用nouveau</h3><p>将ubuntu自带显卡驱动加入黑名单。虽然我没遇到过类似的问题，但是如果你碰到了类似于显卡驱动无法安装的情况，不妨试试这种方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim &#x2F;etc&#x2F;modprobe.d&#x2F;blacklist-nouveau.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/modprobe.d/blacklist-nouveau.conf</span><br></pre></td></tr></table></figure>
 <p>进入后增加如下一条命令，将nouveau加入黑名单</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br></pre></td></tr></table></figure>
 <p>更新后重启电脑使其生效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br></pre></td></tr></table></figure>
 <p>进入显卡驱动安装目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 777 NVIDIA-Linux-x86_64-xxx.xx.run      <span class="comment"># 主要是给执行权限。将xxx.xx换成安装的驱动版本即可，或者是tab键补全</span></span><br><span class="line">./ NVIDIA-Linux-x86_64-xxx.xx.run</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 777 NVIDIA-Linux-x86_64-xxx.xx.run      <span class="comment"># 主要是给执行权限。将xxx.xx换成安装的驱动版本即可，或者是tab键补全</span></span><br><span class="line">./ NVIDIA-Linux-x86_64-xxx.xx.run</span><br></pre></td></tr></table></figure>
 <p>按照提示完成安装，重启后使用nvidia-smi查看驱动版本及显卡当前状态，有结果表明安装成功。</p>
-<h2 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h2><p>CUDA是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。同样的，桌面版用户可以直接去<a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">CUDA官网</a>安装，具体细节可以参考网上的资料或者是<a href="https://docs.nvidia.com/cuda/" target="_blank" rel="noopener">CUDA官方文档</a>，强烈推荐根据官方文档中的步骤进行安装，官方文档中有着非常详细的说明，根据自己的系统选择合适的安装方式即可。</p>
+<h2 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h2><p>CUDA是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。同样的，桌面版用户可以直接去<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">CUDA官网</a>安装，具体细节可以参考网上的资料或者是<a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/">CUDA官方文档</a>，强烈推荐根据官方文档中的步骤进行安装，官方文档中有着非常详细的说明，根据自己的系统选择合适的安装方式即可。</p>
 <p>如果你已经确定了自己的安装版本，那么进入下载页面根据自己的系统选择合适的安装包，假设选择的是runfile，那么下载完成后，根据下载页面的提示，进入该目录执行以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh cuda_xxx_xxx_linux.run      <span class="comment"># tab补全命令即可</span></span><br></pre></td></tr></table></figure>
 <p>按照提示安装重启即可。</p>
-<p>重启后进入用户根目录下，编辑~/.bashrc文件或者是/etc/bashrc文件，使得打开shell时添加环境变量，根据操作系统不同，~/.bashrc和~/.profile是用户目录下的环境变量设定，/etc/bashrc和/etc/profile是全局环境变量设定，具体设置的区别可以自行了解，这里我们只更改当前用户的环境变量设置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim ~&#x2F;.bashrc      # 编辑.bashrc</span><br></pre></td></tr></table></figure>
+<p>重启后进入用户根目录下，编辑~&#x2F;.bashrc文件或者是&#x2F;etc&#x2F;bashrc文件，使得打开shell时添加环境变量，根据操作系统不同，~&#x2F;.bashrc和~&#x2F;.profile是用户目录下的环境变量设定，&#x2F;etc&#x2F;bashrc和&#x2F;etc&#x2F;profile是全局环境变量设定，具体设置的区别可以自行了解，这里我们只更改当前用户的环境变量设置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim ~/.bashrc      # 编辑.bashrc</span><br></pre></td></tr></table></figure>
 <p>在末尾添加路径和库(假设我们安装的是cuda10.1)，x86_64-linux-gnu两个动态库貌似是ubuntu16.04单独增加的？不管怎样，也把它们添加进来。”:”是分隔符，可以将这些路径写到一起，但是这样较为方便。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/cuda-9.0/bin<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/<span class="built_in">local</span>/cuda-9.0/lib64<span class="variable">$LD_LIBRARY_PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:<span class="variable">$LD_LIBRARY_PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:<span class="variable">$LD_LIBRARY_PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/lib:<span class="variable">$LD_LIBRARY_PATH</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/local/cuda-9.0/bin<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64<span class="variable">$LD_LIBRARY_PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:<span class="variable">$LD_LIBRARY_PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:<span class="variable">$LD_LIBRARY_PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/lib:<span class="variable">$LD_LIBRARY_PATH</span></span><br></pre></td></tr></table></figure>
 <p>使用source命令执行该脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~&#x2F;.bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
 <p>检测cuda是否安装成功</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;cuda-10.1&#x2F;samples&#x2F;1_Utilities&#x2F;deviceQuery</span><br><span class="line">sudo make</span><br><span class="line">.&#x2F;deviceQuery</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/cuda-10.1/samples/1_Utilities/deviceQuery</span><br><span class="line">sudo make</span><br><span class="line">./deviceQuery</span><br></pre></td></tr></table></figure>
 <p>正如其名，devicequery是cuda自带的一个样例，用来检测设备，如果能够正确识别到你的所有GPU，那么cuda安装成功。</p>
-<h2 id="安装cuDNN"><a href="#安装cuDNN" class="headerlink" title="安装cuDNN"></a>安装cuDNN</h2><p>使用GPU计算已经比CPU快很多了，但是依旧不满足计算力，那么可不可以在不改变硬件的条件下，使得GPU的计算力得到进一步提升呢？当然可以。为了达到更高的性能，我们可以借助专业加速库cuDNN。我们需要通过<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">网站</a>首先注册为CUDA开发者才能获得下载权限，这个是支持社交账号登陆的。Ubuntu桌面版的用户当然可以直接登录下载，要注意你的cudnn与CUDA版本是对应的，下载相应的linux版本。cuda的版本应以你实际下载的版本为准，nvidia-smi工具查询到的结果只是他建议的cuda版本，与实际下载的版本无关。如果是服务器或者是纯命令行的用户，会发现wget下载时会遇到一些问题，但是可以通过wget实现cookie欺骗来进行下载，有需要的可以自行了解。</p>
-<p>下载完成后将其解压，得到一个cuda文件夹，进入该文件夹执行以下命令，因为cudnn归根到底是cuda的库，所以我们将其头文件和动态库都复制到/usr/local/cuda下。/usr/local/下的cuda是一个软链接，指向我们真正下载的cuda-10.1文件夹。因此我们在配置时尽量使用cuda而不是cuda-10.1，以后安装更换cuda版本时，直接改变cuda的指向即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp lib64&#x2F;lib* &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64&#x2F;</span><br><span class="line">sudo cp include&#x2F;cudnn.h &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;</span><br></pre></td></tr></table></figure>
-<p>进入/usr/local/cuda/lib64文件夹下，更改动态库(假设我们安装的是cudnn 7.6.5)，具体什么原因不太明白。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -f libcudnn.so libcudnn.so.7</span><br><span class="line">sudo ln -s libcudnn.so.7.6.5 libcudnn.so.7</span><br><span class="line">sudo ln -s libcudnn.so.7 libcudnn.so</span><br><span class="line">sudo ldconfig   <span class="comment"># 使动态库生效</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装cuDNN"><a href="#安装cuDNN" class="headerlink" title="安装cuDNN"></a>安装cuDNN</h2><p>使用GPU计算已经比CPU快很多了，但是依旧不满足计算力，那么可不可以在不改变硬件的条件下，使得GPU的计算力得到进一步提升呢？当然可以。为了达到更高的性能，我们可以借助专业加速库cuDNN。我们需要通过<a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-download">网站</a>首先注册为CUDA开发者才能获得下载权限，这个是支持社交账号登陆的。Ubuntu桌面版的用户当然可以直接登录下载，要注意你的cudnn与CUDA版本是对应的，下载相应的linux版本。cuda的版本应以你实际下载的版本为准，nvidia-smi工具查询到的结果只是他建议的cuda版本，与实际下载的版本无关。如果是服务器或者是纯命令行的用户，会发现wget下载时会遇到一些问题，但是可以通过wget实现cookie欺骗来进行下载，有需要的可以自行了解。</p>
+<p>下载完成后将其解压，得到一个cuda文件夹，进入该文件夹执行以下命令，因为cudnn归根到底是cuda的库，所以我们将其头文件和动态库都复制到&#x2F;usr&#x2F;local&#x2F;cuda下。&#x2F;usr&#x2F;local&#x2F;下的cuda是一个软链接，指向我们真正下载的cuda-10.1文件夹。因此我们在配置时尽量使用cuda而不是cuda-10.1，以后安装更换cuda版本时，直接改变cuda的指向即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp lib64/lib* /usr/local/cuda/lib64/</span><br><span class="line">sudo cp include/cudnn.h /usr/local/cuda/include/</span><br></pre></td></tr></table></figure>
+<p>进入&#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64文件夹下，更改动态库(假设我们安装的是cudnn 7.6.5)，具体什么原因不太明白。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">rm</span> -f libcudnn.so libcudnn.so.7</span><br><span class="line">sudo <span class="built_in">ln</span> -s libcudnn.so.7.6.5 libcudnn.so.7</span><br><span class="line">sudo <span class="built_in">ln</span> -s libcudnn.so.7 libcudnn.so</span><br><span class="line">sudo ldconfig   <span class="comment"># 使动态库生效</span></span><br></pre></td></tr></table></figure>
 <p>所以现在的链接关系是libcudnn.so-&gt;libcudnn.so.7-&gt;libcudnn.so.7.6.5</p>
 <h2 id="下载caffe"><a href="#下载caffe" class="headerlink" title="下载caffe"></a>下载caffe</h2><p>使用git下载caffe的github源码，make编译时是根据Makefile.config来编译的，我们复制一份Makefile.config.example并将其命名为Makefile.config，将原来的作为备份。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;bvlc&#x2F;caffe.git</span><br><span class="line">cd caffe&#x2F;</span><br><span class="line">cp Makefile.config.example Makefile.config</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/bvlc/caffe.git</span><br><span class="line">cd caffe/</span><br><span class="line">cp Makefile.config.example Makefile.config</span><br></pre></td></tr></table></figure>
 
 <h2 id="Makefile-config文件配置"><a href="#Makefile-config文件配置" class="headerlink" title="Makefile.config文件配置"></a>Makefile.config文件配置</h2><p>主要还是看编译过程中错误怎么报，根据报错来解决比较好，我只是提供一个我自己的配置方法，但是在不同的设备和版本上运行的时候仍有可能报错。</p>
 <p>使用vim编辑Makefile.config文件，cudnn前面的注释取消</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># cuDNN acceleration switch (uncomment to build with cuDNN).</span><br><span class="line">USE_CUDNN :&#x3D; 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># cuDNN acceleration switch (uncomment to build with cuDNN).</span><br><span class="line">USE_CUDNN := 1</span><br></pre></td></tr></table></figure>
 <p>使用<code>pkg-config --modversion opencv</code>查看opencv版本，如果是opencv3的话，将opencv前面的注释取消</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Uncomment if you&#39;re using OpenCV 3</span><br><span class="line">OPENCV_VERSION :&#x3D; 3</span><br></pre></td></tr></table></figure>
-<p>根据使用的cuda版本注释相应的ARCH，我使用的是10.1，所以删掉了所有的<em>_20和</em>_21，就成了下面这个样子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># CUDA architecture setting: going with all of them.</span><br><span class="line"># For CUDA &lt; 6.0, comment the *_50 through *_61 lines for compatibility.</span><br><span class="line"># For CUDA &lt; 8.0, comment the *_60 and *_61 lines for compatibility.</span><br><span class="line"># For CUDA &gt;&#x3D; 9.0, comment the *_20 and *_21 lines for compatibility.</span><br><span class="line">CUDA_ARCH :&#x3D; -gencode arch&#x3D;compute_30,code&#x3D;sm_30 \</span><br><span class="line">                -gencode arch&#x3D;compute_35,code&#x3D;sm_35 \</span><br><span class="line">                -gencode arch&#x3D;compute_50,code&#x3D;sm_50 \</span><br><span class="line">                -gencode arch&#x3D;compute_52,code&#x3D;sm_52 \</span><br><span class="line">                -gencode arch&#x3D;compute_60,code&#x3D;sm_60 \</span><br><span class="line">                -gencode arch&#x3D;compute_61,code&#x3D;sm_61 \</span><br><span class="line">                -gencode arch&#x3D;compute_61,code&#x3D;compute_61</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Uncomment if you&#x27;re using OpenCV 3</span><br><span class="line">OPENCV_VERSION := 3</span><br></pre></td></tr></table></figure>
+<p>根据使用的cuda版本注释相应的ARCH，我使用的是10.1，所以删掉了所有的*_20和*_21，就成了下面这个样子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># CUDA architecture setting: going with all of them.</span><br><span class="line"># For CUDA &lt; 6.0, comment the *_50 through *_61 lines for compatibility.</span><br><span class="line"># For CUDA &lt; 8.0, comment the *_60 and *_61 lines for compatibility.</span><br><span class="line"># For CUDA &gt;= 9.0, comment the *_20 and *_21 lines for compatibility.</span><br><span class="line">CUDA_ARCH := -gencode arch=compute_30,code=sm_30 \</span><br><span class="line">                -gencode arch=compute_35,code=sm_35 \</span><br><span class="line">                -gencode arch=compute_50,code=sm_50 \</span><br><span class="line">                -gencode arch=compute_52,code=sm_52 \</span><br><span class="line">                -gencode arch=compute_60,code=sm_60 \</span><br><span class="line">                -gencode arch=compute_61,code=sm_61 \</span><br><span class="line">                -gencode arch=compute_61,code=compute_61</span><br></pre></td></tr></table></figure>
 <p>BLAS我们选择OpenBlas，将其改为open</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># BLAS choice:</span><br><span class="line"># atlas for ATLAS (default)</span><br><span class="line"># mkl for MKL</span><br><span class="line"># open for OpenBlas</span><br><span class="line">BLAS :&#x3D; open</span><br></pre></td></tr></table></figure>
-<p>在命令行状态下使用<code>sudo find / -name hdf5.h</code> 和 <code>sudo find / -name hdf5_hl.h</code>查看hdf5.h和hdf5_hl.h头文件路径，将其添加到Makfile.config中，一般而言应为/usr/inlucde/hdf5/serial，动态库也要单独的添加，同样的使用<code>sudo find / -name libhdf5.so</code>，也可以得知它并不在一般的/usr/lib或者/usr/local/lib中，因此也要单独添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Whatever else you find you need goes here.</span><br><span class="line"># Whatever else you find you need goes here.</span><br><span class="line">INCLUDE_DIRS :&#x3D; $(PYTHON_INCLUDE) &#x2F;usr&#x2F;local&#x2F;include &#x2F;usr&#x2F;include&#x2F;hdf5&#x2F;serial</span><br><span class="line">LIBRARY_DIRS :&#x3D; $(PYTHON_LIB) &#x2F;usr&#x2F;local&#x2F;lib &#x2F;usr&#x2F;lib &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;hdf5&#x2F;serial</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># BLAS choice:</span><br><span class="line"># atlas for ATLAS (default)</span><br><span class="line"># mkl for MKL</span><br><span class="line"># open for OpenBlas</span><br><span class="line">BLAS := open</span><br></pre></td></tr></table></figure>
+<p>在命令行状态下使用<code>sudo find / -name hdf5.h</code> 和 <code>sudo find / -name hdf5_hl.h </code>查看hdf5.h和hdf5_hl.h头文件路径，将其添加到Makfile.config中，一般而言应为&#x2F;usr&#x2F;inlucde&#x2F;hdf5&#x2F;serial，动态库也要单独的添加，同样的使用<code>sudo find / -name libhdf5.so</code>，也可以得知它并不在一般的&#x2F;usr&#x2F;lib或者&#x2F;usr&#x2F;local&#x2F;lib中，因此也要单独添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Whatever else you find you need goes here.</span><br><span class="line"># Whatever else you find you need goes here.</span><br><span class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial</span><br><span class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial</span><br></pre></td></tr></table></figure>
 
 <h2 id="Makefile文件配置"><a href="#Makefile文件配置" class="headerlink" title="Makefile文件配置"></a>Makefile文件配置</h2><p>找到LIBRARIES，将我们之前通过apt-get下载的依赖库添加进去</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIBRARIES +=glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial</span><br></pre></td></tr></table></figure>
 <p>找到NVCCFALGS，增加预处理和编译时需要的宏-D_FORCE_INLEINES，貌似可以防止nvcc编译出错？不太明白，先添加进去，防止出一些莫名其妙的错误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NVCCFLAGS +&#x3D; -D_FORCE_INLINES -ccbin&#x3D;$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="添加动态链接库路径"><a href="#添加动态链接库路径" class="headerlink" title="添加动态链接库路径"></a>添加动态链接库路径</h2><p>感觉有点无关紧要，Makefile.config中会单独指明路径。编辑/etc/ld.so.conf，添加以下路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">include &#x2F;etc&#x2F;ld.so.conf.d&#x2F;*.conf</span><br><span class="line">include &#x2F;usr&#x2F;lib</span><br><span class="line">include &#x2F;usr&#x2F;local&#x2F;lib</span><br></pre></td></tr></table></figure>
+<h2 id="添加动态链接库路径"><a href="#添加动态链接库路径" class="headerlink" title="添加动态链接库路径"></a>添加动态链接库路径</h2><p>感觉有点无关紧要，Makefile.config中会单独指明路径。编辑&#x2F;etc&#x2F;ld.so.conf，添加以下路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">include /etc/ld.so.conf.d/*.conf</span><br><span class="line">include /usr/lib</span><br><span class="line">include /usr/local/lib</span><br></pre></td></tr></table></figure>
 <p>执行<code>ldconfig</code>使其生效</p>
 <h2 id="caffe编译"><a href="#caffe编译" class="headerlink" title="caffe编译"></a>caffe编译</h2><p>设置完成后使用<code>make all -j</code>编译，一般来说按照我上面的设置不会遇到问题，如果还是出现了各种各样的问题，按照报的具体错误去研究解决，以下为我安装过程中的出现的一些错误，可供参考。出现错误不要紧，<code>make clean</code>后解决问题在编译即可</p>
-<h3 id="“-warning-“math-functions-h-is-an-internal-header-file-and-must-not-be-used-directly-This-file-will-be-removed-in-a-future-CUDA-release-Please-use-cuda-runtime-api-h-or-cuda-runtime-h-instead-””"><a href="#“-warning-“math-functions-h-is-an-internal-header-file-and-must-not-be-used-directly-This-file-will-be-removed-in-a-future-CUDA-release-Please-use-cuda-runtime-api-h-or-cuda-runtime-h-instead-””" class="headerlink" title="“#warning “math_functions.h is an internal header file and must not be used directly. This file will be removed in a future CUDA release. Please use cuda_runtime_api.h or cuda_runtime.h instead.””"></a>“#warning “math_functions.h is an internal header file and must not be used directly. This file will be removed in a future CUDA release. Please use cuda_runtime_api.h or cuda_runtime.h instead.””</h3><p>根据提示，进入/src/caffe/util/math_functions.cu文件中，用cuda_runtime.h头文件代替原来的math_functions.h，高版本的cuda都会用cuda_runtime.h来代替，也可以选择忽视该问题</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#include &lt;math_functions.h&gt;  // CUDA's, not caffe's, for fabs, signbit</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cuda_runtime.h&gt;  //cuda10.1 support,not math_functions.h</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="“-warning-“math-functions-h-is-an-internal-header-file-and-must-not-be-used-directly-This-file-will-be-removed-in-a-future-CUDA-release-Please-use-cuda-runtime-api-h-or-cuda-runtime-h-instead-””"><a href="#“-warning-“math-functions-h-is-an-internal-header-file-and-must-not-be-used-directly-This-file-will-be-removed-in-a-future-CUDA-release-Please-use-cuda-runtime-api-h-or-cuda-runtime-h-instead-””" class="headerlink" title="“#warning “math_functions.h is an internal header file and must not be used directly. This file will be removed in a future CUDA release. Please use cuda_runtime_api.h or cuda_runtime.h instead.””"></a>“#warning “math_functions.h is an internal header file and must not be used directly. This file will be removed in a future CUDA release. Please use cuda_runtime_api.h or cuda_runtime.h instead.””</h3><p>根据提示，进入&#x2F;src&#x2F;caffe&#x2F;util&#x2F;math_functions.cu文件中，用cuda_runtime.h头文件代替原来的math_functions.h，高版本的cuda都会用cuda_runtime.h来代替，也可以选择忽视该问题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#include &lt;math_functions.h&gt;  // CUDA&#x27;s, not caffe&#x27;s, for fabs, signbit</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cuda_runtime.h&gt;</span>  <span class="comment">//cuda10.1 support,not math_functions.h</span></span></span><br></pre></td></tr></table></figure>
 
-<h3 id="“-usr-bin-ld-cannot-find-lhdf5-hl和-usr-bin-ld-cannot-find-lhdf5”"><a href="#“-usr-bin-ld-cannot-find-lhdf5-hl和-usr-bin-ld-cannot-find-lhdf5”" class="headerlink" title="“/usr/bin/ld: cannot find -lhdf5_hl和/usr/bin/ld: cannot find -lhdf5”"></a>“/usr/bin/ld: cannot find -lhdf5_hl和/usr/bin/ld: cannot find -lhdf5”</h3><p>原因在于找不到hdf5动态库文件，可以使用<code>sudo find / -name libhdf5.so</code>，ubuntu16.04 LTS是将该动态库文件放在/usr/lib/x86_64-linux-gnu/hdf5/serial下的，因此我们需在Makefile.config中指明编译时的路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIBRARY_DIRS :&#x3D; $(PYTHON_LIB) &#x2F;usr&#x2F;local&#x2F;lib &#x2F;usr&#x2F;lib &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;hdf5&#x2F;serial</span><br></pre></td></tr></table></figure>
+<h3 id="“-usr-bin-ld-cannot-find-lhdf5-hl和-usr-bin-ld-cannot-find-lhdf5”"><a href="#“-usr-bin-ld-cannot-find-lhdf5-hl和-usr-bin-ld-cannot-find-lhdf5”" class="headerlink" title="“&#x2F;usr&#x2F;bin&#x2F;ld: cannot find -lhdf5_hl和&#x2F;usr&#x2F;bin&#x2F;ld: cannot find -lhdf5”"></a>“&#x2F;usr&#x2F;bin&#x2F;ld: cannot find -lhdf5_hl和&#x2F;usr&#x2F;bin&#x2F;ld: cannot find -lhdf5”</h3><p>原因在于找不到hdf5动态库文件，可以使用<code>sudo find / -name libhdf5.so</code>，ubuntu16.04 LTS是将该动态库文件放在&#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;hdf5&#x2F;serial下的，因此我们需在Makefile.config中指明编译时的路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial</span><br></pre></td></tr></table></figure>
 
 <h2 id="编译完成"><a href="#编译完成" class="headerlink" title="编译完成"></a>编译完成</h2><p>运行<code>make all -j</code>编译不报错即为编译完成，也可以运行<code>make runtest -j</code>来进行测试，测试过程可能较为漫长，请耐心等待。如果没有错误会显示PASSED</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[----------] Global test environment tear-down</span><br><span class="line">[&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;] 2207 tests from 285 test cases ran. (270650 ms total)</span><br><span class="line">[  PASSED  ] 2207 tests.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[----------] Global test environment tear-down</span><br><span class="line">[==========] 2207 tests from 285 test cases ran. (270650 ms total)</span><br><span class="line">[  PASSED  ] 2207 tests.</span><br></pre></td></tr></table></figure>
 <p>到此为止caffe安装编译完成，编译好的文件会放到caffe根目录的build文件夹下，其他接口的编译暂不作说明，感兴趣的可以自己去网络上查找资料。</p>
-<p>附上贾扬清博士的caffe介绍：<a href="http://caffe.berkeleyvision.org/" target="_blank" rel="noopener">http://caffe.berkeleyvision.org/</a></p>
-
-    </div>
-
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/caffe/" rel="tag"># caffe</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/12/29/markdown%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" rel="prev" title="markdown的基本使用">
-      <i class="fa fa-chevron-left"></i> markdown的基本使用
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/01/09/caffe%E8%BF%90%E8%A1%8C%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB%E4%BE%8B%E7%A8%8B/" rel="next" title="caffe运行手写体数字识别例程">
-      caffe运行手写体数字识别例程 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-  </div>
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu换源"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu换源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#阿里云源"><span class="nav-number">1.1.</span> <span class="nav-text">阿里云源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新源"><span class="nav-number">1.2.</span> <span class="nav-text">更新源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装caffe需要的依赖包"><span class="nav-number">2.</span> <span class="nav-text">安装caffe需要的依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Nvidia显卡驱动"><span class="nav-number">3.</span> <span class="nav-text">安装Nvidia显卡驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#禁用nouveau"><span class="nav-number">3.1.</span> <span class="nav-text">禁用nouveau</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装CUDA"><span class="nav-number">4.</span> <span class="nav-text">安装CUDA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装cuDNN"><span class="nav-number">5.</span> <span class="nav-text">安装cuDNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载caffe"><span class="nav-number">6.</span> <span class="nav-text">下载caffe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-config文件配置"><span class="nav-number">7.</span> <span class="nav-text">Makefile.config文件配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile文件配置"><span class="nav-number">8.</span> <span class="nav-text">Makefile文件配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加动态链接库路径"><span class="nav-number">9.</span> <span class="nav-text">添加动态链接库路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#caffe编译"><span class="nav-number">10.</span> <span class="nav-text">caffe编译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#“-warning-“math-functions-h-is-an-internal-header-file-and-must-not-be-used-directly-This-file-will-be-removed-in-a-future-CUDA-release-Please-use-cuda-runtime-api-h-or-cuda-runtime-h-instead-””"><span class="nav-number">10.1.</span> <span class="nav-text">“#warning “math_functions.h is an internal header file and must not be used directly. This file will be removed in a future CUDA release. Please use cuda_runtime_api.h or cuda_runtime.h instead.””</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“-usr-bin-ld-cannot-find-lhdf5-hl和-usr-bin-ld-cannot-find-lhdf5”"><span class="nav-number">10.2.</span> <span class="nav-text">“&#x2F;usr&#x2F;bin&#x2F;ld: cannot find -lhdf5_hl和&#x2F;usr&#x2F;bin&#x2F;ld: cannot find -lhdf5”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译完成"><span class="nav-number">11.</span> <span class="nav-text">编译完成</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">newgoals</p>
-  <div class="site-description" itemprop="description">lirenjie的小博客</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">7</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/newgoals" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;newgoals" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
-  
-  &copy; 2019 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">newgoals</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
-    </span>
-    <span title="站点总字数">48k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">43 分钟</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
-  </div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-</body>
-</html>
+<p>附上贾扬清博士的caffe介绍：<a target="_blank" rel="noopener" href="http://caffe.berkeleyvision.org/">http://caffe.berkeleyvision.org/</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://yoursite.com">newgoals</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/12/30/ubuntu16-04%E5%AE%89%E8%A3%85caffe/">http://yoursite.com/2019/12/30/ubuntu16-04%E5%AE%89%E8%A3%85caffe/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">Newgoals' Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/caffe/">caffe</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/01/09/caffe%E8%BF%90%E8%A1%8C%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB%E4%BE%8B%E7%A8%8B/" title="caffe运行手写体数字识别例程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">caffe运行手写体数字识别例程</div></div></a></div><div class="next-post pull-right"><a href="/2019/12/29/markdown%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="markdown的基本使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">markdown的基本使用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/01/09/caffe%E8%BF%90%E8%A1%8C%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB%E4%BE%8B%E7%A8%8B/" title="caffe运行手写体数字识别例程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-09</div><div class="title">caffe运行手写体数字识别例程</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">newgoals</div><div class="author-info__description">lirenjie的小博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu%E6%8D%A2%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">Ubuntu换源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91%E6%BA%90"><span class="toc-number">1.1.</span> <span class="toc-text">阿里云源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%BA%90"><span class="toc-number">1.2.</span> <span class="toc-text">更新源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85caffe%E9%9C%80%E8%A6%81%E7%9A%84%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="toc-number">2.</span> <span class="toc-text">安装caffe需要的依赖包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Nvidia%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8"><span class="toc-number">3.</span> <span class="toc-text">安装Nvidia显卡驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%81%E7%94%A8nouveau"><span class="toc-number">3.1.</span> <span class="toc-text">禁用nouveau</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85CUDA"><span class="toc-number">4.</span> <span class="toc-text">安装CUDA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85cuDNN"><span class="toc-number">5.</span> <span class="toc-text">安装cuDNN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDcaffe"><span class="toc-number">6.</span> <span class="toc-text">下载caffe</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Makefile-config%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="toc-number">7.</span> <span class="toc-text">Makefile.config文件配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Makefile%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="toc-number">8.</span> <span class="toc-text">Makefile文件配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93%E8%B7%AF%E5%BE%84"><span class="toc-number">9.</span> <span class="toc-text">添加动态链接库路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#caffe%E7%BC%96%E8%AF%91"><span class="toc-number">10.</span> <span class="toc-text">caffe编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%9C-warning-%E2%80%9Cmath-functions-h-is-an-internal-header-file-and-must-not-be-used-directly-This-file-will-be-removed-in-a-future-CUDA-release-Please-use-cuda-runtime-api-h-or-cuda-runtime-h-instead-%E2%80%9D%E2%80%9D"><span class="toc-number">10.1.</span> <span class="toc-text">“#warning “math_functions.h is an internal header file and must not be used directly. This file will be removed in a future CUDA release. Please use cuda_runtime_api.h or cuda_runtime.h instead.””</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%80%9C-usr-bin-ld-cannot-find-lhdf5-hl%E5%92%8C-usr-bin-ld-cannot-find-lhdf5%E2%80%9D"><span class="toc-number">10.2.</span> <span class="toc-text">“&#x2F;usr&#x2F;bin&#x2F;ld: cannot find -lhdf5_hl和&#x2F;usr&#x2F;bin&#x2F;ld: cannot find -lhdf5”</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%AE%8C%E6%88%90"><span class="toc-number">11.</span> <span class="toc-text">编译完成</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/06/yolov5%E6%BA%90%E7%A0%81%E5%B0%81%E8%A3%85/" title="yolov5源码封装">yolov5源码封装</a><time datetime="2023-09-06T09:26:42.000Z" title="发表于 2023-09-06 17:26:42">2023-09-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/09/06/%E4%BD%BF%E7%94%A8Typora%E4%B8%8Ehexo%E7%BC%96%E5%86%99Blog/" title="使用Typora与hexo编写Blog">使用Typora与hexo编写Blog</a><time datetime="2023-09-06T09:24:17.000Z" title="发表于 2023-09-06 17:24:17">2023-09-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/01/14/Google-Protocol-Buffer%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="Google_Protocol_Buffer基本使用">Google_Protocol_Buffer基本使用</a><time datetime="2020-01-14T09:01:49.000Z" title="发表于 2020-01-14 17:01:49">2020-01-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/01/09/caffe%E8%BF%90%E8%A1%8C%E6%89%8B%E5%86%99%E4%BD%93%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB%E4%BE%8B%E7%A8%8B/" title="caffe运行手写体数字识别例程">caffe运行手写体数字识别例程</a><time datetime="2020-01-09T10:04:43.000Z" title="发表于 2020-01-09 18:04:43">2020-01-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2019/12/30/ubuntu16-04%E5%AE%89%E8%A3%85caffe/" title="ubuntu16.04安装caffe">ubuntu16.04安装caffe</a><time datetime="2019-12-30T07:02:09.000Z" title="发表于 2019-12-30 15:02:09">2019-12-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By newgoals</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
