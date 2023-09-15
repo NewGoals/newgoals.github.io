@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Cpp命名规范指南 | Newgoals' Blog</title><meta name="author" content="newgoals"><meta name="copyright" content="newgoals"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="最重要的一致性规则是命名管理。 命名的风格能让我们在不需要去查找类型声明的条件下快速地了解某个名字代表的含义: 类型, 变量, 函数, 常量, 宏, 等等, 甚至. 我们大脑中的模式匹配引擎非常依赖这些命名规则。命名规则具有一定随意性, 但相比按个人喜好命名, 一致性更重要, 所以无论你认为它们是否重要, 规则总归是规则.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cpp命名规范指南">
+<meta property="og:url" content="http://newgoals.github.io/2023/09/15/Cpp%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Newgoals&#39; Blog">
+<meta property="og:description" content="最重要的一致性规则是命名管理。 命名的风格能让我们在不需要去查找类型声明的条件下快速地了解某个名字代表的含义: 类型, 变量, 函数, 常量, 宏, 等等, 甚至. 我们大脑中的模式匹配引擎非常依赖这些命名规则。命名规则具有一定随意性, 但相比按个人喜好命名, 一致性更重要, 所以无论你认为它们是否重要, 规则总归是规则.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://api.yimian.xyz/img?type=moe?681">
+<meta property="article:published_time" content="2023-09-15T02:23:50.000Z">
+<meta property="article:modified_time" content="2023-09-15T06:34:08.902Z">
+<meta property="article:author" content="newgoals">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.yimian.xyz/img?type=moe?681"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://newgoals.github.io/2023/09/15/Cpp%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%E6%8C%87%E5%8D%97/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Cpp命名规范指南',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-15 14:34:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/IMG_20220811_235637.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.yimian.xyz/img?type=moe?681')"><nav id="nav"><span id="blog-info"><a href="/" title="Newgoals' Blog"><span class="site-name">Newgoals' Blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Cpp命名规范指南</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-15T02:23:50.000Z" title="发表于 2023-09-15 10:23:50">2023-09-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-15T06:34:08.902Z" title="更新于 2023-09-15 14:34:08">2023-09-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Cpp命名规范指南"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><center>最重要的一致性规则是命名管理。 命名的风格能让我们在不需要去查找类型声明的条件下快速地了解某个名字代表的含义: 类型, 变量, 函数, 常量, 宏, 等等, 甚至. 我们大脑中的模式匹配引擎非常依赖这些命名规则。</center><center>命名规则具有一定随意性, 但相比按个人喜好命名, 一致性更重要, 所以无论你认为它们是否重要, 规则总归是规则.</center>
+
+<span id="more"></span>
+
+<blockquote>
+<p>由于在最近的编程过程中，逐渐发现由于代码量过多，导致经常分不清那个变量来自于哪里，作用域是什么样子，经常出现混乱，于是越发感觉到命名规范的重要程度，本文中主要参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/377183341">C++命名规范</a>进行编写，同时也可借鉴<a target="_blank" rel="noopener" href="https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/naming/#">Google开源项目风格指南</a>与<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/855605">C++命名规则&amp;书写规范</a>，但相对于后两者的风格来说，前者的规范更符合我编写代码的习惯。</p>
+</blockquote>
+<h2 id="常见命名法"><a href="#常见命名法" class="headerlink" title="常见命名法"></a>常见命名法</h2><p><strong>匈牙利命名法：</strong>基本原则是：变量名＝属性＋类型＋对象描述，其中每一对象的名称都要求有明确含义，可以取对象名字全称或名字的一部分。命名要基于容易记忆容易理解的原则。保证名字的连贯性是非常重要的。</p>
+<p><strong>Camel命名法：</strong>即骆驼式命名法，原因是采用该命名法的名称看起来就像骆驼的驼峰一样高低起伏。Camel命名法有两种形式：混合使用大小写字母和单词之间加下划线，例如runFast和run_fast都属于Camel命名法。</p>
+<p><strong>Pascal命名法：</strong>与Camel命名法类似，不过Pascal命名法的首字母为大写字母。</p>
+<h2 id="共性规则"><a href="#共性规则" class="headerlink" title="共性规则"></a>共性规则</h2><h3 id="规则1-标识符应简单明了，望文知义"><a href="#规则1-标识符应简单明了，望文知义" class="headerlink" title="规则1 标识符应简单明了，望文知义"></a>规则1 标识符应简单明了，望文知义</h3><p>标识符采用英文单词。切忌使用汉语拼音来命名。程序中的英文单词一般不要太复杂，用词应当准确。例如不要把CurrentValue写成NowValue。</p>
+<p>尽量不要使用单词缩写或首字母缩写。只有当标识符过长时才考虑使用单词缩写。在使用缩写时，不要自创缩写，尽量使用被广泛接受的缩写。</p>
+<h3 id="规则2-标识符长度应当符合“min-length-max-information”原则"><a href="#规则2-标识符长度应当符合“min-length-max-information”原则" class="headerlink" title="规则2 标识符长度应当符合“min-length &amp;&amp; max-information”原则"></a>规则2 标识符长度应当符合“min-length &amp;&amp; max-information”原则</h3><p>一般的讲，长名字能更好地表达含义，所以函数名、变量名、类名长达十几个字符不足为怪。但是名字也不是越长越好。例如：变量名maxval就比maxValueUntilOverflow更好用。单字符的名字也是有用的，常见的如i,j,k,m,n,x,y,z等，它们通常用作函数内的局部变量。</p>
+<h3 id="规则3-命名规则尽量与所采用的操作系统或开发工具的风格保持一致"><a href="#规则3-命名规则尽量与所采用的操作系统或开发工具的风格保持一致" class="headerlink" title="规则3 命名规则尽量与所采用的操作系统或开发工具的风格保持一致"></a>规则3 命名规则尽量与所采用的操作系统或开发工具的风格保持一致</h3><p>例如，Windows应用程序的标识符通常采用“大小写”混排的方式，如AddChild。而Unix应用程序的标识符通常采用“小写加下划线”的方式，如add_child。别把这两类风格混在一起用。</p>
+<h3 id="规则4-程序中不要出现仅靠大小写区分的标识符"><a href="#规则4-程序中不要出现仅靠大小写区分的标识符" class="headerlink" title="规则4 程序中不要出现仅靠大小写区分的标识符"></a>规则4 程序中不要出现仅靠大小写区分的标识符</h3><p>例如：int x和int X；void foo() 和void FOO() 等。</p>
+<h3 id="规则5-避免在不同级别的作用域中重名"><a href="#规则5-避免在不同级别的作用域中重名" class="headerlink" title="规则5 避免在不同级别的作用域中重名"></a>规则5 避免在不同级别的作用域中重名</h3><p>程序中不要出现标识符完全相同的局部变量和全局变量，尽管两者因作用域的不同而不会发生语法错误，但会使人产生误解。</p>
+<h3 id="规则6-正确命名具有互斥意义的标识符"><a href="#规则6-正确命名具有互斥意义的标识符" class="headerlink" title="规则6 正确命名具有互斥意义的标识符"></a>规则6 正确命名具有互斥意义的标识符</h3><p>使用正确的反义词组命名具有互斥意义的变量或相反动作的函数。</p>
+<p>如：”MinValue”和”MaxValue”，”GetName()” 和 “SetName()”</p>
+<h3 id="规则7-尽量避免名字中出现数字编号"><a href="#规则7-尽量避免名字中出现数字编号" class="headerlink" title="规则7 尽量避免名字中出现数字编号"></a>规则7 尽量避免名字中出现数字编号</h3><p>如Value1,Value2等，除非逻辑上的确需要编号。这是为了防止程序产生无意义的名字，降低程序的可读性。</p>
+<h3 id="规则8-使用库标志"><a href="#规则8-使用库标志" class="headerlink" title="规则8 使用库标志"></a>规则8 使用库标志</h3><p>在开发动态库时，为了防止软件库中的一些标识符和其它软件库中标识符冲突，可以为各种标识符加上能反映软件性质的前缀。</p>
+<p>例如三维图形标准OpenGL的所有库函数均以gl开头，所有常量（或宏定义）均以GL开头。</p>
+<h2 id="细则"><a href="#细则" class="headerlink" title="细则"></a>细则</h2><p>采用了一部分的“匈牙利”法命名规范，但没有照搬。“匈牙利”法最大的特征就是类型前缀。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> nNum = <span class="number">0</span>; <span class="comment">// n 为类型信息，表明 nNum 是一个 int 类型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CUser</span>; <span class="comment">// C 为类型信息，表明 CUser 是一个类</span></span><br></pre></td></tr></table></figure>
+
+<p>但在单字符的变量中，如i，j，k中继续使用匈牙利命名法就会给人一种繁琐的感觉。因此，添加变量的类型前缀是一个可选的命名规则。</p>
+<h3 id="类和接口"><a href="#类和接口" class="headerlink" title="类和接口"></a>类和接口</h3><blockquote>
+<p>除了异常类等个别情况（不希望用户把该类看作一个普通的、正常的类之情况）外，C++类&#x2F;结构的命名应该遵循以下准则：　C++类&#x2F;结构的命名类的名称都要以大写字母“C”开头，后跟一个或多个单词。为便于界定，每个单词的首字母要大写。</p>
+<p>推荐的组成形式类的命名推荐用”名词”或”形容词＋名词”的形式，例如：”CAnalyzer”, “CFastVector” …. 不同于C++类的概念，传统的C结构体只是一种将一组数据捆绑在一起的方式。传统C结构体的命名规则为：C结构体的名称全部由大写字母组成，单词间使用下划线界定，例如：”SERVICE_STATUS”, “DRIVER_INFO”</p>
+</blockquote>
+<ol>
+<li><strong>命名：</strong>类名都以大写字母“C”开头，后跟一个或多个单词。每个单词的首字母要大写。接口以大写”I”开头，代表Interface。</li>
+<li><strong>组成形式：</strong>推荐用”名词”或”形容词＋名词”的形式，例如：”CAnalyzer”, “CFastVector”</li>
+</ol>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ol>
+<li><strong>命名：</strong>函数的名称由一个或多个单词组成。每个单词的首字母要大写。最长不得超过20个字符。</li>
+<li><strong>组成形式：</strong>全局函数应当使用”动词”或者”动词＋名词”（动宾词组）的形式。例如：”gGetName()”, “ gDrawBox()”。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">特殊函数类型</th>
+<th align="center">命名规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">保护成员函数</td>
+<td align="center">保护成员函数的开头应当加上一个下划线“_”以示区别，例如：”_SetState()”</td>
+</tr>
+<tr>
+<td align="center">私有成员函数</td>
+<td align="center">类似地，私有成员函数的开头应当加上两个下划线“__”，例如：”__DestroyImp()”</td>
+</tr>
+<tr>
+<td align="center">虚函数</td>
+<td align="center">虚函数习惯以“Do”开头，如：”DoRefresh()”, “_DoEncryption()”</td>
+</tr>
+<tr>
+<td align="center">回调和事件处理函数</td>
+<td align="center">回调和事件处理函数习惯以单词“On”开头。例如：”_OnTimer()”, “OnExit()”</td>
+</tr>
+</tbody></table>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量是程序中使用最多的标识符，变量的命名规范是一套C++命名规范中最重要的部分：</p>
+<ol>
+<li><p><strong>命名：</strong>变量名由作用域前缀＋类型前缀＋一个或多个单词组成。变量用小写字母开头的单词组合而成，第二个单词的首字母要大写。例如：int nDrawMode。变量最长不得超过20个字符。特殊的：对于某些用途简单明了的局部变量，也可以使用简化的方式，如：i, j, k, x, y, z</p>
+</li>
+<li><p><strong>组成形式：</strong>变量的名字应当使用”名词”或者”形容词＋名词”。例如：”nCode”, “m_nState”，”nMaxWidth”，” oldValue “，” newValue “。</p>
+</li>
+<li><p><strong>作用域前缀：</strong>作用域前缀标明一个变量的可见范围。作用域可以有如下几种：</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">前缀</th>
+<th>说明</th>
+<th align="left">例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">无</td>
+<td>局部变量</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">m_</td>
+<td>类的成员变量（member）</td>
+<td align="left">int m_width;</td>
+</tr>
+<tr>
+<td align="left">ms_</td>
+<td>类的静态成员变量（static member）</td>
+<td align="left">static int ms_initValue;</td>
+</tr>
+<tr>
+<td align="left">s_</td>
+<td>静态变量（static）</td>
+<td align="left">static int s_initValue;</td>
+</tr>
+<tr>
+<td align="left">g_</td>
+<td>外部全局变量（global）</td>
+<td align="left">int g_howManyPeople;</td>
+</tr>
+<tr>
+<td align="left">sg_</td>
+<td>静态全局变量（static global）</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">gg_</td>
+<td>进程间共享的共享数据段全局变量（global global）</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>说明：作用域前缀不同于下面的类型前缀，应该坚决执行。原因是：</p>
+<ul>
+<li><p>变量作用域和链接性改变的情况是很少的，例如，很少的情况下会把一个成员变量改成静态变量</p>
+</li>
+<li><p>编程中使用的工具常常不会直观的显示变量的作用域和链接性</p>
+</li>
+</ul>
+<ol start="4">
+<li>类型前缀</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>前缀</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>b</td>
+<td>布尔型变量（bool, BOOL）</td>
+<td>bEnable</td>
+</tr>
+<tr>
+<td>ch</td>
+<td>字符型变量（char TCHAR）</td>
+<td>chName</td>
+</tr>
+<tr>
+<td>lpsz</td>
+<td>LPSTR、LPCSTR、LPCTSTR</td>
+<td>lpszName</td>
+</tr>
+<tr>
+<td>n</td>
+<td>整型和位域变量（int, UINT,__int32,__int64）</td>
+<td>nLength</td>
+</tr>
+<tr>
+<td>l</td>
+<td>long</td>
+<td>lOffset</td>
+</tr>
+<tr>
+<td>by</td>
+<td>BYTE</td>
+<td></td>
+</tr>
+<tr>
+<td>w</td>
+<td>WORD</td>
+<td>wPos</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>DWORD</td>
+<td>dwRange</td>
+</tr>
+<tr>
+<td>f</td>
+<td>浮点型变量（float）</td>
+<td></td>
+</tr>
+<tr>
+<td>d</td>
+<td>double</td>
+<td></td>
+</tr>
+<tr>
+<td>p</td>
+<td>指针型变量和迭代子（pointer）</td>
+<td>pDoc</td>
+</tr>
+<tr>
+<td>lp</td>
+<td>远指针</td>
+<td></td>
+</tr>
+<tr>
+<td>e</td>
+<td>枚举型变量（enumeration）</td>
+<td></td>
+</tr>
+<tr>
+<td>pfn</td>
+<td>特别针对指向函数的指针变量和函数对象指针（pointer of function）</td>
+<td></td>
+</tr>
+<tr>
+<td>g</td>
+<td>数组（grid）</td>
+<td></td>
+</tr>
+<tr>
+<td>h</td>
+<td>handle Windows对象句柄</td>
+<td>hWnd</td>
+</tr>
+</tbody></table>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>常量名由类型前缀＋全大写字母组成，单词间通过下划线来界定，如：cDELIMITER, nMAX_BUFFER。类型前缀的定义与变量命名规则中的相同。</p>
+<h3 id="结构体、宏、枚举变量、联合体"><a href="#结构体、宏、枚举变量、联合体" class="headerlink" title="结构体、宏、枚举变量、联合体"></a>结构体、宏、枚举变量、联合体</h3><p>全部由前缀+大写字母组成，单词间使用下划线界定。</p>
+<ol>
+<li><strong>结构体：</strong>加小写前缀”tag”，之后以大写字母开头。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">tagPOINT</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> x;</span><br><span class="line">	<span class="type">int</span> y;</span><br><span class="line">&#125; POINT;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>宏：</strong>大写字母组成，单词间使用下划线界定。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXNUMBER 100</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>枚举变量：</strong>加小写前缀”enum”。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> <span class="title class_">_FILE_OPEN_MODE</span></span><br><span class="line">&#123;</span><br><span class="line">	OPEN_READONLY，</span><br><span class="line">	OPEN_READWRITE</span><br><span class="line">&#125;FILE_OPEN_MODE;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><strong>联合体：</strong>加小写前缀”uni”。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> <span class="title class_">_VARIANT</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> unichVal;</span><br><span class="line">	<span class="type">int</span> uninVal;</span><br><span class="line">	<span class="type">float</span> uniftVal;</span><br><span class="line">&#125; VARIANT;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://newgoals.github.io">newgoals</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://newgoals.github.io/2023/09/15/Cpp%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%E6%8C%87%E5%8D%97/">http://newgoals.github.io/2023/09/15/Cpp%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%E6%8C%87%E5%8D%97/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://newgoals.github.io" target="_blank">Newgoals' Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a></div><div class="post_share"><div class="social-share" data-image="https://api.yimian.xyz/img?type=moe?681" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/09/07/UPBGE%E8%99%9A%E6%8B%9F%E4%BB%BF%E7%9C%9F%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" title="UPBGE虚拟仿真自动驾驶"><img class="cover" src="https://api.yimian.xyz/img?type=moe?1841" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">UPBGE虚拟仿真自动驾驶</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/IMG_20220811_235637.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">newgoals</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/newgoals"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/newgoals" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:1226107035@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">“道可道，非常道；名可名，非常名。”</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%91%BD%E5%90%8D%E6%B3%95"><span class="toc-text">常见命名法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E6%80%A7%E8%A7%84%E5%88%99"><span class="toc-text">共性规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%991-%E6%A0%87%E8%AF%86%E7%AC%A6%E5%BA%94%E7%AE%80%E5%8D%95%E6%98%8E%E4%BA%86%EF%BC%8C%E6%9C%9B%E6%96%87%E7%9F%A5%E4%B9%89"><span class="toc-text">规则1 标识符应简单明了，望文知义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%992-%E6%A0%87%E8%AF%86%E7%AC%A6%E9%95%BF%E5%BA%A6%E5%BA%94%E5%BD%93%E7%AC%A6%E5%90%88%E2%80%9Cmin-length-max-information%E2%80%9D%E5%8E%9F%E5%88%99"><span class="toc-text">规则2 标识符长度应当符合“min-length &amp;&amp; max-information”原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%993-%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%E5%B0%BD%E9%87%8F%E4%B8%8E%E6%89%80%E9%87%87%E7%94%A8%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%88%96%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E7%9A%84%E9%A3%8E%E6%A0%BC%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4"><span class="toc-text">规则3 命名规则尽量与所采用的操作系统或开发工具的风格保持一致</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%994-%E7%A8%8B%E5%BA%8F%E4%B8%AD%E4%B8%8D%E8%A6%81%E5%87%BA%E7%8E%B0%E4%BB%85%E9%9D%A0%E5%A4%A7%E5%B0%8F%E5%86%99%E5%8C%BA%E5%88%86%E7%9A%84%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-text">规则4 程序中不要出现仅靠大小写区分的标识符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%995-%E9%81%BF%E5%85%8D%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%BA%A7%E5%88%AB%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%AD%E9%87%8D%E5%90%8D"><span class="toc-text">规则5 避免在不同级别的作用域中重名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%996-%E6%AD%A3%E7%A1%AE%E5%91%BD%E5%90%8D%E5%85%B7%E6%9C%89%E4%BA%92%E6%96%A5%E6%84%8F%E4%B9%89%E7%9A%84%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-text">规则6 正确命名具有互斥意义的标识符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%997-%E5%B0%BD%E9%87%8F%E9%81%BF%E5%85%8D%E5%90%8D%E5%AD%97%E4%B8%AD%E5%87%BA%E7%8E%B0%E6%95%B0%E5%AD%97%E7%BC%96%E5%8F%B7"><span class="toc-text">规则7 尽量避免名字中出现数字编号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%998-%E4%BD%BF%E7%94%A8%E5%BA%93%E6%A0%87%E5%BF%97"><span class="toc-text">规则8 使用库标志</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%86%E5%88%99"><span class="toc-text">细则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3"><span class="toc-text">类和接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F"><span class="toc-text">常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E3%80%81%E5%AE%8F%E3%80%81%E6%9E%9A%E4%B8%BE%E5%8F%98%E9%87%8F%E3%80%81%E8%81%94%E5%90%88%E4%BD%93"><span class="toc-text">结构体、宏、枚举变量、联合体</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/15/Cpp%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%E6%8C%87%E5%8D%97/" title="Cpp命名规范指南"><img src="https://api.yimian.xyz/img?type=moe?681" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cpp命名规范指南"/></a><div class="content"><a class="title" href="/2023/09/15/Cpp%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%E6%8C%87%E5%8D%97/" title="Cpp命名规范指南">Cpp命名规范指南</a><time datetime="2023-09-15T02:23:50.000Z" title="发表于 2023-09-15 10:23:50">2023-09-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/07/UPBGE%E8%99%9A%E6%8B%9F%E4%BB%BF%E7%9C%9F%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" title="UPBGE虚拟仿真自动驾驶"><img src="https://api.yimian.xyz/img?type=moe?1841" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="UPBGE虚拟仿真自动驾驶"/></a><div class="content"><a class="title" href="/2023/09/07/UPBGE%E8%99%9A%E6%8B%9F%E4%BB%BF%E7%9C%9F%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" title="UPBGE虚拟仿真自动驾驶">UPBGE虚拟仿真自动驾驶</a><time datetime="2023-09-07T08:54:17.000Z" title="发表于 2023-09-07 16:54:17">2023-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/07/vscode-blender%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83/" title="vscode-blender调试环境"><img src="https://api.yimian.xyz/img?type=moe?4254" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vscode-blender调试环境"/></a><div class="content"><a class="title" href="/2023/09/07/vscode-blender%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83/" title="vscode-blender调试环境">vscode-blender调试环境</a><time datetime="2023-09-07T08:54:01.000Z" title="发表于 2023-09-07 16:54:01">2023-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/07/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%86%85%E7%BD%91%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/" title="实验室内网远程访问"><img src="https://api.yimian.xyz/img?type=moe?7491" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="实验室内网远程访问"/></a><div class="content"><a class="title" href="/2023/09/07/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%86%85%E7%BD%91%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/" title="实验室内网远程访问">实验室内网远程访问</a><time datetime="2023-09-07T08:53:35.000Z" title="发表于 2023-09-07 16:53:35">2023-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/06/yolov5%E6%BA%90%E7%A0%81%E5%B0%81%E8%A3%85/" title="yolov5源码封装"><img src="https://api.yimian.xyz/img?type=moe?5045" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yolov5源码封装"/></a><div class="content"><a class="title" href="/2023/09/06/yolov5%E6%BA%90%E7%A0%81%E5%B0%81%E8%A3%85/" title="yolov5源码封装">yolov5源码封装</a><time datetime="2023-09-06T09:26:42.000Z" title="发表于 2023-09-06 17:26:42">2023-09-06</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://api.yimian.xyz/img?type=moe?681')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By newgoals</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
